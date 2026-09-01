@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educação Inclusiva - Acessibilidade na Escola</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo">EscolaInclusiva<span>.org</span></div>
+            <div class="accessibility-controls">
+                <button id="btn-contrast" aria-label="Alternar Alto Contraste">Contraste ◐</button>
+                <button id="btn-decrease-font" aria-label="Diminuir tamanho da fonte">A-</button>
+                <button id="btn-increase-font" aria-label="Aumentar tamanho da fonte">A+</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <span class="badge">Educação Sem Barreiras</span>
+                <h1>Transforme sua escola em um ambiente verdadeiramente acessível</h1>
+                <p>Garanta a inclusão integral de alunos com deficiência com metodologias, tecnologias assistivas e adequação arquitetônica de alto impacto.</p>
+                <a href="#conteudo" class="btn-primary">Explorar Soluções</a>
+            </div>
+        </section>
+
+        <section id="conteudo" class="tabs-section container">
+            <div class="tab-buttons" role="tablist">
+                <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="arquitetonica" id="tab-1">Arquitetônica</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="pedagogica" id="tab-2">Pedagógica</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tecnologica" id="tab-3">Tecnológica</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="atitudinal" id="tab-4">Atitudinal</button>
+            </div>
+
+            <div class="tab-contents">
+                <div id="arquitetonica" class="tab-panel active" role="tabpanel" aria-labelledby="tab-1">
+                    <h2>Acessibilidade Arquitetônica</h2>
+                    <p>Eliminação de barreiras físicas nos prédios e espaços escolares para garantir a autonomia de mobilidade.</p>
+                    <ul>
+                        <li>Rampas de acesso com inclinação adequada e piso tátil.</li>
+                        <li>Banheiros adaptados com barras de apoio e espaço de giro.</li>
+                        <li>Portas amplas, elevadores acessíveis e sinalização em Braille.</li>
+                    </ul>
+                </div>
+
+                <div id="pedagogica" class="tab-panel" role="tabpanel" aria-labelledby="tab-2" hidden>
+                    <h2>Acessibilidade Pedagógica</h2>
+                    <p>Flexibilização de recursos Didáticos e práticas de ensino para atender às diferentes formas de aprendizagem.</p>
+                    <ul>
+                        <li>Material didático impresso em Braille e caracteres ampliados.</li>
+                        <li>Planos de Ensino Individualizados (PEI) para cada estudante.</li>
+                        <li>Treinamento de professores em Libras e suporte de ledores.</li>
+                    </ul>
+                </div>
+
+                <div id="tecnologica" class="tab-panel" role="tabpanel" aria-labelledby="tab-3" hidden>
+                    <h2>Tecnologia Assistiva</h2>
+                    <p>Ferramentas digitais e dispositivos adaptativos para autonomia de estudo.</p>
+                    <ul>
+                        <li>Leitores de tela para computadores e tablets educacionais.</li>
+                        <li>Teclados adaptados, acionadores e mouses oculares.</li>
+                        <li>Softwares de conversão de voz em texto e tradução de Libras.</li>
+                    </ul>
+                </div>
+
+                <div id="atitudinal" class="tab-panel" role="tabpanel" aria-labelledby="tab-4" hidden>
+                    <h2>Acessibilidade Atitudinal</h2>
+                    <p>Combate ao preconceito e promoção de uma cultura escolar empática e acolhedora.</p>
+                    <ul>
+                        <li>Workshops e palestras de conscientização para alunos e funcionários.</li>
+                        <li>Campanhas contra o capacitismo no ambiente escolar.</li>
+                        <li>Criação de comitês de inclusão com participação dos estudantes.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="container accordion-section">
+            <h2>Perguntas Frequentes (FAQ)</h2>
+            <div id="accordion-container"></div>
+        </section>
+
+        <section class="container carousel-section">
+            <h2>Depoimentos de Educadores e Alunos</h2>
+            <div class="carousel-wrapper">
+                <button id="prev-btn" aria-label="Depoimento Anterior">❮</button>
+                <div id="carousel-card" class="card"></div>
+                <button id="next-btn" aria-label="Próximo Depoimento">❯</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 EscolaInclusiva.org — Todos os direitos reservados. Promovendo acessibilidade na educação.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
