@@ -1,0 +1,134 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* --- 1. Acessibilidade: Tamanho da Fonte --- */
+    let fontSize = 16;
+    const btnIncrease = document.getElementById('btn-increase-font');
+    const btnDecrease = document.getElementById('btn-decrease-font');
+
+    btnIncrease.addEventListener('click', () => {
+        if (fontSize < 24) {
+            fontSize += 2;
+            document.documentElement.style.setProperty('--base-font-size', `${fontSize}px`);
+        }
+    });
+
+    btnDecrease.addEventListener('click', () => {
+        if (fontSize > 12) {
+            fontSize -= 2;
+            document.documentElement.style.setProperty('--base-font-size', `${fontSize}px`);
+        }
+    });
+
+    /* --- 2. Acessibilidade: Alto Contraste --- */
+    const btnContrast = document.getElementById('btn-contrast');
+    btnContrast.addEventListener('click', () => {
+        document.body.classList.toggle('high-contrast');
+    });
+
+    /* --- 3. Sistema de Abas (Tabs) --- */
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            tabButtons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+            tabPanels.forEach(panel => panel.hidden = true);
+
+            button.classList.add('active');
+            button.setAttribute('aria-selected', 'true');
+            const targetId = button.getAttribute('aria-controls');
+            document.getElementById(targetId).hidden = false;
+        });
+    });
+
+    /* --- 4. Renderização do Acordeão (FAQ) via Array --- */
+    const faqData = [
+        {
+            pergunta: "O que a legislação brasileira exige sobre acessibilidade escolar?",
+            resposta: "A Lei Brasileira de Inclusão (LBI nº 13.146) garante um sistema educacional inclusivo em todos os níveis, proibindo a cobrança de valores adicionais em mensalidades para alunos com deficiência."
+        },
+        {
+            pergunta: "Como iniciar a adaptação em uma escola com recursos limitados?",
+            resposta: "O primeiro passo é a eliminação de barreiras atitudinais com a capacitação da equipe, seguido por adaptações pedagógicas e intervenções arquitetônicas prioritárias, como rampas de acesso."
+        },
+        {
+            pergunta: "Qual é o papel da Tecnologia Assistiva na sala de aula?",
+            resposta: "A Tecnologia Assistiva inclui recursos e serviços que promovem a autonomia e participação dos estudantes, desde leitores de tela até adaptadores para escrita."
+        }
+    ];
+
+    const accordionContainer = document.getElementById('accordion-container');
+    faqData.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'accordion-item';
+        itemDiv.innerHTML = `
+            <button class="accordion-header" aria-expanded="false" id="acc-header-${index}">
+                ${item.pergunta} <span>+</span>
+            </button>
+            <div class="accordion-body" hidden id="acc-body-${index}">
+                <p>${item.resposta}</p>
+            </div>
+        `;
+        accordionContainer.appendChild(itemDiv);
+    });
+
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const body = header.nextElementSibling;
+            const expanded = header.getAttribute('aria-expanded') === 'true';
+
+            header.setAttribute('aria-expanded', !expanded);
+            body.hidden = expanded;
+            header.querySelector('span').textContent = expanded ? '+' : '-';
+        });
+    });
+
+    /* --- 5. Renderização do Carrossel via Array --- */
+    const testimonials = [
+        {
+            texto: "A implementação da acessibilidade arquitetônica e atitudinal transformou o clima da nossa escola. Todos os alunos aprendem juntos e com autonomia.",
+            autor: "Prof. Maria Silva",
+            cargo: "Diretora Pedagógica"
+        },
+        {
+            texto: "Com o uso de leitores de tela e material adaptado, consigo acompanhar todas as aulas no mesmo ritmo dos meus colegas. A inclusão faz toda a diferença.",
+            autor: "Lucas Oliveira",
+            cargo: "Aluno do Ensino Médio"
+        },
+        {
+            texto: "A capacitação da equipe docente abriu nossos olhos para metodologias verdadeiramente inclusivas. A educação só é completa quando é para todos.",
+            autor: "Carlos Santos",
+            cargo: "Coordenador de Ensino"
+        }
+    ];
+
+    let currentSlide = 0;
+    const carouselCard = document.getElementById('carousel-card');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    function updateCarousel() {
+        const item = testimonials[currentSlide];
+        carouselCard.innerHTML = `
+            <p>"${item.texto}"</p>
+            <br>
+            <strong>${item.autor}</strong> - <small>${item.cargo}</small>
+        `;
+    }
+
+    prevBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide === 0) ? testimonials.length - 1 : currentSlide - 1;
+        updateCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentSlide = (currentSlide === testimonials.length - 1) ? 0 : currentSlide + 1;
+        updateCarousel();
+    });
+
+    updateCarousel();
+});
